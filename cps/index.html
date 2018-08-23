@@ -94,6 +94,7 @@ html {
 				if((count + 1000 ) < Date.now()){
 					if(max < cps.length){
 						max = cps.length;
+						
 					}
 				}
 			}
@@ -102,6 +103,9 @@ html {
 	);
 	function counttimer() {
 		var counttimer = document.getElementById("time");
+		if((count + 1000) > Date.now()){
+			min = cps.length;
+		}
 		if ((count +10000) - Date.now() > 0.000) {
 			counttimer.innerHTML = ((count +10000) - Date.now()) / 1000;
 			var i = 0;
