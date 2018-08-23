@@ -47,7 +47,141 @@ timerID = setInterval('counttimer()',1);
 started = 1;
 }else if(started == 1){
 click.innerHTML = clickcount;
+}<style>
+html {
+	width: 100%;
+	height: 100%;
+	background-color: #00BFFF;
+        color: white;
+	user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	}
+.countdown {
+  position: fixed;
+  top: 0px;
+  text-align: center;
+  }
+.count {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  text-align: center;
+  vertical-align: middle;
+  }
+.result {
+  position: fixed;
+  top: 0;
+  right: 0;
+  text-align: center;
+  vertical-align: middle;
+  }
+#replay {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+  vertical-align: middle;
 }
+#share {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  text-align: center;
+  vertical-align: middle;
+}
+}
+</style>
+<meta charset="UTF-8">
+<title>CPS測定</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+</head>
+<html>
+<font size="7"><div class="countdown"><p id = "time"> クリックしてスタート！</p></div>
+<div class="count"><p id = "click"> クリックしてスタート！</p></div>
+<div class="result"><p id = "result"></p></div>
+<div id="replay"><p id="replay"></p></div>
+<div id="share"><p id="share"></p></div>
+</font>
+</html>
+<script type="text/javascript">
+var started = 0;
+var clicks = [];
+var cps = [];
+var max = 1;
+var min = 1;
+var count = Date.now();
+var tweet = "CPS測定器";
+document.body.addEventListener( "mousedown", function( event ) {
+var counttimer = document.getElementById("time");
+if(started == 0){
+count = Date.now();
+timerID = setInterval('counttimer()',1);
+clicks = [Date.now()];
+cps = [Date.now()];
+started = 1;
+}else if(started == 1){
+clicks.push(Date.now());
+cps.push(Date.now());
+if((count + 1000 ) < Date.now()){
+if(max < cps.length){
+max = cps.length;
+}
+if(min == 1 || min > cps.length){
+min = cps.length;
+}
+}
+}
+}
+ );
+function counttimer() {
+var counttimer = document.getElementById("time");
+ if ((count +10000) - Date.now() > 0.000) {
+counttimer.innerHTML = ((count +10000) - Date.now()) / 1000;
+var i = 0;
+cps.forEach(function( time ) {
+  if((time + 1000) < Date.now()){
+  cps.splice(i, 1);
+  }else{
+  i++;
+}
+});
+var click = document.getElementById("click");
+click.innerHTML = cps.length;
+ }else{
+clearInterval(timerID);
+counttimer.innerHTML = "終了！";
+var result = document.getElementById("result");
+if(min > cps.length){
+min = cps.length;
+}
+result.innerHTML = "合計: " + clicks.length + "<br>平均: " + (clicks.length / 10) + "<br>最大: " + max + "<br>最低: " + min;
+  document.getElementById("replay").innerHTML = "<=もう一度";
+var click = document.getElementById("click");
+click.innerHTML = "";
+var share = document.getElementById("share");
+share.innerHTML = "結果をツイートする";
+tweet = "CPS測定器  合計: " + clicks.length + ", 平均: " + (clicks.length / 10) + ", 最大: " + max + ", 最低: " + min;
+clicks = [];
+cps = [];
+max = 1;
+min = 1;
+}
+}
+document.getElementById("share").onclick = function() {
+window.open("http://twitter.com/intent/tweet?original_referer=https://suikawars.ga/cps&url=https://suikawars.ga/cps&text="+ tweet);
+}
+document.getElementById("replay").onclick = function() {
+  document.getElementById("replay").innerHTML = "";
+ document.getElementById("result").innerHTML = "";
+document.getElementById("click").innerHTML = "クリックしてスタート！";
+document.getElementById("time").innerHTML = "クリックしてスタート！";
+document.getElementById("share").innerHTML = "";
+started = 0;
+count = Date.now();
+};
+</script>
 }
  ) ;
 
@@ -56,7 +190,148 @@ click.innerHTML = clickcount;
 function counttimer() {
 var counttimer = document.getElementById("time");
  if ((count +10000) - Date.now() > 0.000) {
-counttimer.innerHTML = ((count +10000) - Date.now()) / 1000;
+counttimer.innerHTML = ((count +10000) - Date.now()) / 1000;<style>
+html {
+	width: 100%;
+	height: 100%;
+	background-color: #00BFFF;
+	color: white;
+	user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+}
+.countdown {
+	position: fixed;
+	top: 0px;
+	text-align: center;
+}
+.count {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	text-align: center;
+	vertical-align: middle;
+}
+.result {
+	position: fixed;
+	top: 0;
+	right: 0;
+	text-align: center;
+	vertical-align: middle;
+}
+#replay {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	text-align: center;
+	vertical-align: middle;
+}
+#share {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	text-align: center;
+	vertical-align: middle;
+}
+}
+</style>
+<meta charset="UTF-8">
+<title>CPS測定</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+</head>
+<html>
+<font size="7"><div class="countdown"><p id = "time"> クリックしてスタート！</p></div>
+	<div class="count"><p id = "click"> クリックしてスタート！</p></div>
+	<div class="result"><p id = "result"></p></div>
+	<div id="replay"><p id="replay"></p></div>
+	<div id="share"><p id="share"></p></div>
+</font>
+</html>
+<script type="text/javascript">
+	var started = 0;
+	var clicks = [];
+	var cps = [];
+	var max = 1;
+	var min = 1;
+	var count = Date.now();
+	var tweet = "CPS測定器";
+	document.body.addEventListener( "mousedown", function( event ) {
+		var counttimer = document.getElementById("time");
+		if(started == 0){
+			count = Date.now();
+			timerID = setInterval('counttimer()',1);
+			clicks = [Date.now()];
+			cps = [Date.now()];
+			started = 1;
+		}else if(started == 1){
+			clicks.push(Date.now());
+			cps.push(Date.now());
+			if((count + 1000 ) < Date.now()){
+				if(max < cps.length){
+					max = cps.length;
+				}
+				if(min == 1 || min > cps.length){
+					min = cps.length;
+				}
+			}
+		}
+	}
+	);
+	function counttimer() {
+		var counttimer = document.getElementById("time");
+		if ((count +10000) - Date.now() > 0.000) {
+			counttimer.innerHTML = ((count +10000) - Date.now()) / 1000;
+			var i = 0;
+			cps.forEach(function( time ) {
+				if((time + 1000) < Date.now()){
+					cps.splice(i, 1);
+				}else{
+					i++;
+				}
+			});
+			var click = document.getElementById("click");
+			click.innerHTML = cps.length;
+		}else{
+			clearInterval(timerID);
+			counttimer.innerHTML = "終了！";
+			var result = document.getElementById("result");
+			if(min > cps.length){
+				min = cps.length;
+			}
+			result.innerHTML = "合計: " + clicks.length + "<br>平均: " + (clicks.length / 10) + "<br>最大: " + max + "<br>最低: " + min;
+			document.getElementById("replay").innerHTML = "<=もう一度";
+			var click = document.getElementById("click");
+			click.innerHTML = "";
+			var share = document.getElementById("share");
+			share.innerHTML = "結果をツイートする";
+			tweet = "CPS測定器  合計: " + clicks.length + ", 平均: " + (clicks.length / 10) + ", 最大: " + max + ", 最低: " + min;
+			clicks = [];
+			cps = [];
+			max = 1;
+			min = 1;
+		}
+	}
+	document.getElementById("share").onclick = function() {
+		window.open("http://twitter.com/intent/tweet?original_referer=https://suikawars.ga/cps&url=https://suikawars.ga/cps&text="+ tweet);
+	}
+	document.getElementById("replay").onclick = function() {
+		document.getElementById("replay").innerHTML = "";
+		document.getElementById("result").innerHTML = "";
+		document.getElementById("click").innerHTML = "クリックしてスタート！";
+		document.getElementById("time").innerHTML = "クリックしてスタート！";
+		document.getElementById("share").innerHTML = "";
+		started = 0;
+		count = Date.now();
+	};
+	document.body.addEventListener( "touchstart", function( event ) {
+		if(window.confirm("このページではタップ数を測定できません。タップを測定できるページに移動しますか?")){
+			window.location.href = "https://suikawars.ga/tap";
+		} else {
+		}
+	}
+	);
+</script>
  } else{
 clearInterval(timerID);
 counttimer.innerHTML = "終了！";
