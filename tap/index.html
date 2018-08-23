@@ -1,24 +1,24 @@
 <style>
 html {
-	width: 100%;
-	height: 100%;
-	background-color: #00BFFF;
-        color: white;
-       vertical-align: middle;
-       text-align: center;
+  width: 100%;
+  height: 100%;
+  background-color: #00BFFF;
+  color: white;
+  vertical-align: middle;
+  text-align: center;
 }
 .countdown {
   position: fixed;
   top: 0px;
   text-align: center;
-  }
+}
 .count {
   position: fixed;
   bottom: 0;
   right: 0;
   text-align: center;
   vertical-align: middle;
-  }
+}
 }
 </style>
 <meta charset="UTF-8">
@@ -27,48 +27,57 @@ html {
 </head>
 <html>
 <font size="7"><div class="countdown"><p id = "time"> タップしてスタート！</p></div>
-<div class="count"><p id = "tap"> タップしてスタート！</p></div>
+  <div class="count"><p id = "tap"> タップしてスタート！</p></div>
 </font>
 </html>
 <script type="text/javascript">
-var started = 0;
-var tapcount =0;
-var count = Date.now();
+  var started = 0;
+  var tapcount =0;
+  var count = Date.now();
 
-document.body.addEventListener( "touchstart", function( event ) {
-	var touchObject = event.changedTouches[0] ;
-	var x = touchObject.pageX ;
-	var y = touchObject.pageY ;
-var counttimer = document.getElementById("time");
-var taps = document.getElementById("tap");
-taps.innerHTML = ++tapcount;
-if(started == 0){
-count = Date.now();
-timerID = setInterval('counttimer()',1);
-started = 1;
-}else if(started == 1){
-taps.innerHTML = tapcount;
-}
-}
- ) ;
+  document.body.addEventListener( "touchstart", function( event ) {
+    var touchObject = event.changedTouches[0] ;
+    var x = touchObject.pageX ;
+    var y = touchObject.pageY ;
+    var counttimer = document.getElementById("time");
+    var taps = document.getElementById("tap");
+    taps.innerHTML = ++tapcount;
+    if(started == 0){
+      count = Date.now();
+      timerID = setInterval('counttimer()',1);
+      started = 1;
+    }else if(started == 1){
+      taps.innerHTML = tapcount;
+    }
+  }
+  ) ;
 
 
 
-function counttimer() {
-var counttimer = document.getElementById("time");
- if ((count +10000) - Date.now() > 0) {
-counttimer.innerHTML = ((count +10000) - Date.now()) / 1000;
- } else{
-clearInterval(timerID);
-counttimer.innerHTML = "終了！";
-if(window.confirm("終了！ あなたの記録は" + tapcount + "回です！")){
-counttimer.innerHTML = "タップしてスタート！";
-var taps = document.getElementById("tap");
-taps.innerHTML =  "タップしてスタート！";
-started = 0;
-tapcount = 0;
-	} else {
-}
-}
-}
+  function counttimer() {
+    var counttimer = document.getElementById("time");
+    if ((count +10000) - Date.now() > 0) {
+      counttimer.innerHTML = ((count +10000) - Date.now()) / 1000;
+    } else{
+      clearInterval(timerID);
+      counttimer.innerHTML = "終了！";
+      if(window.confirm("終了！ あなたの記録は" + tapcount + "回です！")){
+        counttimer.innerHTML = "タップしてスタート！";
+        var taps = document.getElementById("tap");
+        taps.innerHTML =  "タップしてスタート！";
+        started = 0;
+        tapcount = 0;
+      } else {
+        started = 3;
+      }
+    }
+  }
+  window.location.href = "https://suikawars.ga/cps";
+  document.body.addEventListener( "mousedown", function( event ) {
+    if(window.confirm("このページではクリック数を測定できません。クリックを測定できるページに移動しますか?")){
+      window.location.href = "https://suikawars.ga/cps";
+    } else {
+    }
+  }
+  );
 </script>
