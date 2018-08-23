@@ -4,8 +4,12 @@ html {
 	height: 100%;
 	background-color: #00BFFF;
         color: white;
-       vertical-align: middle;
-       text-align: center;
+	vertical-align: middle;
+	text-align: center;
+	user-select: none; /* CSS3 */
+	-moz-user-select: none; /* Firefox */
+	-webkit-user-select: none; /* Safari、Chromeなど */
+	-ms-user-select: none; /* IE10かららしい */
 }
 .countdown {
   position: fixed;
