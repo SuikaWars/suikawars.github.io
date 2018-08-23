@@ -47,7 +47,147 @@ html {
 <meta charset="UTF-8">
 
 <title>タップ数測定</title>
+<style>
 
+html {
+
+  width: 100%;
+
+  height: 100%;
+
+  background-color: #00BFFF;
+
+  color: white;
+
+  vertical-align: middle;
+
+  text-align: center;
+
+}
+
+.countdown {
+
+  position: fixed;
+
+  top: 0px;
+
+  text-align: center;
+
+}
+
+.count {
+
+  position: fixed;
+
+  bottom: 0;
+
+  right: 0;
+
+  text-align: center;
+
+  vertical-align: middle;
+
+}
+
+}
+
+</style>
+
+<meta charset="UTF-8">
+
+<title>タップ数測定</title>
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+
+</head>
+
+<html>
+
+<font size="7"><div class="countdown"><p id = "time"> タップしてスタート！</p></div>
+
+  <div class="count"><p id = "tap"> タップしてスタート！</p></div>
+
+</font>
+
+</html>
+
+<script type="text/javascript">
+
+  var started = 0;
+
+  var tapcount =0;
+
+  var count = Date.now();
+
+
+
+  document.body.addEventListener( "touchstart", function( event ) {
+
+    var touchObject = event.changedTouches[0] ;
+
+    var x = touchObject.pageX ;
+
+    var y = touchObject.pageY ;
+
+    var counttimer = document.getElementById("time");
+
+    var taps = document.getElementById("tap");
+
+    taps.innerHTML = ++tapcount;
+
+    if(started == 0){
+
+      count = Date.now();
+
+      timerID = setInterval('counttimer()',1);
+
+      started = 1;
+
+    }else if(started == 1){
+
+      taps.innerHTML = tapcount;
+
+    }
+
+  }
+
+  ) ;
+
+  function counttimer() {
+
+    var counttimer = document.getElementById("time");
+
+    if ((count +10000) - Date.now() > 0) {
+
+      counttimer.innerHTML = ((count +10000) - Date.now()) / 1000;
+
+    } else{
+
+      clearInterval(timerID);
+
+      counttimer.innerHTML = "終了！";
+
+      if(window.confirm("終了！ あなたの記録は" + tapcount + "回です！")){
+
+        counttimer.innerHTML = "タップしてスタート！";
+
+        var taps = document.getElementById("tap");
+
+        taps.innerHTML =  "タップしてスタート！";
+
+        started = 0;
+
+        tapcount = 0;
+
+      } else {
+
+      }
+
+    }
+
+  }
+
+</script>
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
 
 </head>
