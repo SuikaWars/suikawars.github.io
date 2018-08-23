@@ -44,8 +44,10 @@ html {
 }
 }
 </style>
+<head>
 <meta charset="UTF-8">
 <title>CPS測定</title>
+	<meta name="description" content="シンプルで使いやすいCPS測定器です。">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
 </head>
 <html>
@@ -64,23 +66,25 @@ html {
 	var min = 1;
 	var count = Date.now();
 	var tweet = "CPS測定器";
+	var button = 3;
+	var buttonname = "";
 	document.body.addEventListener( "mousedown", function( event ) {
-		var counttimer = document.getElementById("time");
-		if(started == 0){
-			count = Date.now();
-			timerID = setInterval('counttimer()',1);
-			clicks = [Date.now()];
-			cps = [Date.now()];
-			started = 1;
-		}else if(started == 1){
-			clicks.push(Date.now());
-			cps.push(Date.now());
-			if((count + 1000 ) < Date.now()){
-				if(max < cps.length){
-					max = cps.length;
-				}
-				if(min == 1 || min > cps.length){
-					min = cps.length;
+		if(button == 3 ||event.button == button){
+			var counttimer = document.getElementById("time");
+			if(started == 0){
+				button = event.button;
+				count = Date.now();
+				timerID = setInterval('counttimer()',1);
+				clicks = [Date.now()];
+				cps = [Date.now()];
+				started = 1;
+			}else if(started == 1){
+				clicks.push(Date.now());
+				cps.push(Date.now());
+				if((count + 1000 ) < Date.now()){
+					if(max < cps.length){
+						max = cps.length;
+					}
 				}
 			}
 		}
@@ -94,6 +98,9 @@ html {
 			cps.forEach(function( time ) {
 				if((time + 1000) < Date.now()){
 					cps.splice(i, 1);
+					if(min > cps.length){
+						min = cps.length;
+					}
 				}else{
 					i++;
 				}
@@ -107,17 +114,27 @@ html {
 			if(min > cps.length){
 				min = cps.length;
 			}
-			result.innerHTML = "合計: " + clicks.length + "<br>平均: " + (clicks.length / 10) + "<br>最大: " + max + "<br>最低: " + min;
+			if(button = 0){
+				buttonname = "左クリック";
+			}else if(button = 1){
+				buttonname = "中クリック";
+			}else if(button = 2){
+				buttonname = "右クリック";
+			}else{
+				buttonname = "不明";
+			}
+			result.innerHTML = buttonname + "<br>合計: " + clicks.length + "<br>平均: " + (clicks.length / 10) + "<br>最大: " + max + "<br>最低: " + min;
 			document.getElementById("replay").innerHTML = "<=もう一度";
 			var click = document.getElementById("click");
 			click.innerHTML = "";
 			var share = document.getElementById("share");
 			share.innerHTML = "結果をツイートする";
-			tweet = "CPS測定器  合計: " + clicks.length + ", 平均: " + (clicks.length / 10) + ", 最大: " + max + ", 最低: " + min;
+			tweet = "CPS測定器 使用ボタン:" + buttonname + " 合計: " + clicks.length + ", 平均: " + (clicks.length / 10) + ", 最大: " + max + ", 最低: " + min;
 			clicks = [];
 			cps = [];
 			max = 1;
 			min = 1;
+			button = 3;
 		}
 	}
 	document.getElementById("share").onclick = function() {
