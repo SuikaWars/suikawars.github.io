@@ -12,68 +12,70 @@
 		-webkit-user-select: none;
 		-ms-user-select: none;
 	}
-@media screen and (min-width: 800px) {
-	.countdown {
-		position: fixed;
-		top: 0px;
-		text-align: center;
+	@media screen and (min-width: 800px) {
+		.countdown {
+			position: fixed;
+			top: 0px;
+			text-align: center;
+		}
+		.count {
+			position: fixed;
+			bottom: 0;
+			right: 0;
+		}
+		.result {
+			position: fixed;
+			top: 0;
+			right: 0;
+			text-align: center;
+			vertical-align: middle;
+		}
+		#replay {
+			position: fixed;
+			bottom: 0;
+			left: 0;
+			text-align: center;
+			vertical-align: middle;
+		}
+		#share {
+			position: fixed;
+			bottom: 0;
+			right: 0;
+			text-align: center;
+			vertical-align: middle;
+		}
+		.settings {
+			padding: 0% 0;
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+			justify-content: flex-end;
+		}
+		#setting1 {
+		}
+		#setting2 {
+		}
 	}
-	.count {
-		position: fixed;
-		bottom: 0;
-		right: 0;
-	}
-	.result {
-		position: fixed;
-		top: 0;
-		right: 0;
-		text-align: center;
-		vertical-align: middle;
-	}
-	#replay {
-		position: fixed;
-		bottom: 0;
-		left: 0;
-		text-align: center;
-		vertical-align: middle;
-	}
-	#share {
-		position: fixed;
-		bottom: 0;
-		right: 0;
-		text-align: center;
-		vertical-align: middle;
-	}
-	.settings {
-		padding: 0% 0;
-		display: flex;
-		flex-direction: row;
-		flex-wrap: wrap;
-		justify-content: flex-end;
-	}
-	#setting1 {
-	}
-	#setting2 {
+	@media screen and (max-width: 800px) {
+		.count {
+			position: fixed;
+			bottom: 0;
+			right: 0;
+		}
+		.settings {
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+			justify-content: center;
+		}
+		#setting1 {
+		}
+		#setting2 {
+		}
 	}
 }
-@media screen and (max-width: 800px) {
-	.count {
-		position: fixed;
-		bottom: 0;
-		right: 0;
-	}
-	.settings {
-		display: flex;
-		flex-direction: row;
-		flex-wrap: wrap;
-		justify-content: center;
-	}
-	#setting1 {
-	}
-	#setting2 {
-	}
-}
-}
+<link rel="alternate" hreflang="en" href="https://suikawars.ga/cps/"/>
+<link rel="alternate" hreflang="ja" href="https://suikawars.ga/cps/ja.html" />
 </style>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124498070-1"></script>
@@ -144,9 +146,9 @@
 				var counttimer = document.getElementById("time");
 				if(started == 0){
 					clicks = [];
-	         	      		cps = [];
-			          	max = 1;
-		        		min = 1;
+					cps = [];
+					max = 1;
+					min = 1;
 					button = event.button;
 					count = Date.now();
 					timerID = setInterval('counttimer()',1);
@@ -159,8 +161,35 @@
 				}else if(started == 1){
 					clicks.push(Date.now());
 					cps.push(Date.now());
-				        if(max < cps.length){
-					       max = cps.length;
+					if(max < cps.length){
+						max = cps.length;
+					}
+				}
+			}
+		}
+		);
+		document.body.addEventListener( "touchstart", function( event ) {
+			if((button == 3 ||button == -1) && !(event.target.id == "setting1"|| event.target.id == "setting2"|| event.target.id == "setting")){
+				var counttimer = document.getElementById("time");
+				if(started == 0){
+					clicks = [];
+					cps = [];
+					max = 1;
+					min = 1;
+					button = -1;
+					count = Date.now();
+					timerID = setInterval('counttimer()',1);
+					clicks = [Date.now()];
+					cps = [Date.now()];
+					document.getElementById("setting").innerHTML = "";
+					document.getElementById("setting1").innerHTML = "";
+					document.getElementById("setting2").innerHTML = "";
+					started = 1;
+				}else if(started == 1){
+					clicks.push(Date.now());
+					cps.push(Date.now());
+					if(max < cps.length){
+						max = cps.length;
 					}
 				}
 			}
@@ -199,6 +228,8 @@
 					buttonname = "Middle Click";
 				}else if(button == 2){
 					buttonname = "Right Click";
+				}else if(button == -1){
+					buttonname = "Tap";
 				}else{
 					buttonname = "Unknown";
 				}
@@ -208,16 +239,16 @@
 				click.innerHTML = "";
 				var share = document.getElementById("share");
 				share.innerHTML = "Share on Twitter";
-				tweet = "Click Speed Test  Button:" + buttonname + " Total of " + setting + "seconds: " + clicks.length + ", Average: " + Math.round(clicks.length / setting *100) /100 + ", Max: " + max + ", Min: " + min;
+				tweet = "Click Speed Test,  Button:" + buttonname + ", Total of " + setting + " seconds: " + clicks.length + ", Average: " + Math.round(clicks.length / setting *100) /100 + ", Max: " + max + ", Min: " + min;
 				if(setting == 1){
-				   tweet = "Click Speed Test  Button:" + buttonname + " Total of 1 second: " + clicks.length + ", Average: " + Math.round(clicks.length / setting *100) /100 + ", Max: " + max + ", Min: " + min;
+					tweet = "Click Speed Test  Button:" + buttonname + " Total of 1 second: " + clicks.length + ", Average: " + Math.round(clicks.length / setting *100) /100 + ", Max: " + max + ", Min: " + min;
 				}
 				clicks = [];
 				cps = [];
 				max = 1;
 				min = 1;
 				button = 3;
-			}r
+			}
 		}
 		document.getElementById("share").onclick = function() {
 			window.open("http://twitter.com/intent/tweet?original_referer=https://suikawars.ga/cps&url=https://suikawars.ga/cps&text="+ tweet);
@@ -234,12 +265,6 @@
 			started = 0;
 			count = Date.now();
 		};
-		document.body.addEventListener( "touchstart", function( event ) {
-			if(window.confirm("Sorry, This site doesn't corriespend to tap.")){
-			} else {
-			}
-		}
-		);
 	</script>
 </body>
 </html>
