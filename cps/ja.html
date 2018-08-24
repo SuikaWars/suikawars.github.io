@@ -238,7 +238,7 @@
 				var click = document.getElementById("click");
 				click.innerHTML = "";
 				var share = document.getElementById("share");
-				share.innerHTML = "Share on Twitter";
+				share.innerHTML = "結果をツイート";
 				tweet = "秒間クリック数測定器 あなたのCPSを測ります。 測定結果:  ボタン:" + buttonname + ", " + setting + "秒間の合計: " + clicks.length + ", 平均: " + Math.round(clicks.length / setting *100) /100 + ", 最大: " + max + ", 最低: " + min;
 				clicks = [];
 				cps = [];
@@ -248,7 +248,7 @@
 			}
 		}
 		document.getElementById("share").onclick = function() {
-			window.open("http://twitter.com/intent/tweet?original_referer=https://suikawars.ga/cps&url=https://suikawars.ga/cps&text="+ tweet);
+			window.open("http://twitter.com/intent/tweet?original_referer=https://suikawars.ga/cps/ja.html/&url=https://suikawars.ga/cps/ja.html/&text="+ tweet);
 		}
 		document.getElementById("replay").onclick = function() {
 			document.getElementById("replay").innerHTML = "";
