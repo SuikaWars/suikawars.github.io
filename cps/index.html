@@ -126,6 +126,10 @@
 			if((button == 3 ||event.button == button) && !(event.target.id == "setting1"|| event.target.id == "setting2"|| event.target.id == "setting")){
 				var counttimer = document.getElementById("time");
 				if(started == 0){
+					clicks = [];
+	         	      		cps = [];
+			          	max = 1;
+		        		min = 1;
 					button = event.button;
 					count = Date.now();
 					timerID = setInterval('counttimer()',1);
