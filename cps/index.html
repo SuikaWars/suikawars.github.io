@@ -12,6 +12,7 @@
 		-webkit-user-select: none;
 		-ms-user-select: none;
 	}
+@media screen and (min-width: 800px) {
 	.countdown {
 		position: fixed;
 		top: 0px;
@@ -21,8 +22,6 @@
 		position: fixed;
 		bottom: 0;
 		right: 0;
-		text-align: center;
-		vertical-align: middle;
 	}
 	.result {
 		position: fixed;
@@ -56,6 +55,24 @@
 	}
 	#setting2 {
 	}
+}
+@media screen and (max-width: 800px) {
+	.count {
+		position: fixed;
+		bottom: 0;
+		right: 0;
+	}
+	.settings {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+	#setting1 {
+	}
+	#setting2 {
+	}
+}
 }
 </style>
 <!-- Global site tag (gtag.js) - Google Analytics -->
