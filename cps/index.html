@@ -84,20 +84,20 @@
 	gtag('config', 'UA-124498070-1');
 </script>
 <meta charset="UTF-8">
-<title>CPS測定器 - suikawars.ga</title>
-<meta name="description" content="秒数指定ができ、シンプルで使いやすいCPS(秒間クリック数)測定器です。">
+<title>Click Speed Test - suikawars.ga</title>
+<meta name="description" content="CPS Test - Test your clicking speed.">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
 </head>
 <body oncontextmenu="return false;">
-	<font size="7"><div class="countdown"><p id = "time"> クリックしてスタート！</p></div>
-		<div class="count"><p id = "click"> クリックしてスタート！</p></div>
+	<font size="7"><div class="countdown"><p id = "time">CLICK TO START!</p></div>
+		<div class="count"><p id = "click">CLICK TO START</p></div>
 		<div class="result"><p id = "result"></p></div>
 		<div id="replay"><p id="replay"></p></div>
 		<div id="share"><p id="share"></p></div>
 		<div class="settings">
-			<p><div id="setting1" title="Shiftキーを押しながらクリックで+5"><p id="setting1">🔼</p></div></p>
+			<p><div id="setting1" title="Hold down Shift key and Click to +5"><p id="setting1">🔼</p></div></p>
 			<p id="setting">10</p>
-			<p><div id="setting2" title="Shiftキーを押しながらクリックで-5"><p id="setting2">🔽</p></div></p>
+			<p><div id="setting2" title="Hold down Shift key and Click to -5"><p id="setting2">🔽</p></div></p>
 		</div>
 	</font>
 	<script type="text/javascript">
@@ -107,7 +107,7 @@
 		var max = 1;
 		var min = 1;
 		var count = Date.now();
-		var tweet = "CPS測定器";
+		var tweet = "CPS SPEED TEST";
 		var button = 3;
 		var buttonname = "";
 		var setting = 10;
@@ -125,7 +125,7 @@
 					setting = setting - 5;
 				}else{
 					if(setting == 1){
-						alert("数値は1以上に設定してください。");
+						alert("must be greater than or equal to 1.");
 					}
 					setting = 1;
 				}
@@ -133,7 +133,7 @@
 				if(setting - 1 >= 1){
 					setting = setting - 1;
 				}else{
-					alert("数値は1以上に設定してください。");
+					alert("must be greater than or equal to 1.");
 					setting = 1;
 				}
 			}
@@ -188,33 +188,36 @@
 				click.innerHTML = cps.length;
 			}else{
 				clearInterval(timerID);
-				counttimer.innerHTML = "終了！";
+				counttimer.innerHTML = "Finished!";
 				var result = document.getElementById("result");
 				if(min > cps.length){
 					min = cps.length;
 				}
 				if(button == 0){
-					buttonname = "左クリック";
+					buttonname = "Left Click";
 				}else if(button == 1){
-					buttonname = "中クリック";
+					buttonname = "Middle Click";
 				}else if(button == 2){
-					buttonname = "右クリック";
+					buttonname = "Right Click";
 				}else{
-					buttonname = "不明";
+					buttonname = "Unknown";
 				}
-				result.innerHTML = buttonname + "<br>合計: " + clicks.length + "<br>平均: " + Math.round(clicks.length / setting *100) /100 + "<br>最大: " + max + "<br>最低: " + min;
-				document.getElementById("replay").innerHTML = "<=もう一度";
+				result.innerHTML = buttonname + "<br>Total: " + clicks.length + "<br>Average: " + Math.round(clicks.length / setting *100) /100 + "<br>Max: " + max + "<br>Min: " + min;
+				document.getElementById("replay").innerHTML = "<=Try Again";
 				var click = document.getElementById("click");
 				click.innerHTML = "";
 				var share = document.getElementById("share");
-				share.innerHTML = "結果をツイートする";
-				tweet = "CPS測定器 使用ボタン:" + buttonname + " " + setting + "秒間の合計: " + clicks.length + ", 平均: " + Math.round(clicks.length / setting *100) /100 + ", 最大: " + max + ", 最低: " + min;
+				share.innerHTML = "Share on Twitter";
+				tweet = "Click Speed Test  Button:" + buttonname + " Total of " + setting + "seconds: " + clicks.length + ", Average: " + Math.round(clicks.length / setting *100) /100 + ", Max: " + max + ", Min: " + min;
+				if(setting == 1){
+				   tweet = "Click Speed Test  Button:" + buttonname + " Total of 1 second: " + clicks.length + ", Average: " + Math.round(clicks.length / setting *100) /100 + ", Max: " + max + ", Min: " + min;
+				}
 				clicks = [];
 				cps = [];
 				max = 1;
 				min = 1;
 				button = 3;
-			}
+			}r
 		}
 		document.getElementById("share").onclick = function() {
 			window.open("http://twitter.com/intent/tweet?original_referer=https://suikawars.ga/cps&url=https://suikawars.ga/cps&text="+ tweet);
@@ -222,8 +225,8 @@
 		document.getElementById("replay").onclick = function() {
 			document.getElementById("replay").innerHTML = "";
 			document.getElementById("result").innerHTML = "";
-			document.getElementById("click").innerHTML = "クリックしてスタート！";
-			document.getElementById("time").innerHTML = "クリックしてスタート！";
+			document.getElementById("click").innerHTML = "CLICK TO START!";
+			document.getElementById("time").innerHTML = "CLICK TO START!";
 			document.getElementById("share").innerHTML = "";
 			document.getElementById("setting").innerHTML = setting;
 			document.getElementById("setting1").innerHTML = "\uD83D\uDD3C";
@@ -232,8 +235,7 @@
 			count = Date.now();
 		};
 		document.body.addEventListener( "touchstart", function( event ) {
-			if(window.confirm("このページではタップ数を測定できません。タップ数を測定できるページに移動しますか?")){
-				window.location.href = "https://suikawars.ga/tap";
+			if(window.confirm("Sorry, This site doesn't corriespend to tap.")){
 			} else {
 			}
 		}
