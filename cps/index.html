@@ -265,6 +265,10 @@
 			started = 0;
 			count = Date.now();
 		};
+		window.addEventListener('touchmove', function(event) {
+			event.preventDefault();
+		});
+
 	</script>
 </body>
 </html>
