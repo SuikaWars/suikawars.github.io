@@ -84,14 +84,6 @@
 	function gtag(){dataLayer.push(arguments);}
 	gtag('js', new Date());
 	gtag('config', 'UA-124498070-1');
-	var t = 0;
-	document.documentElement.addEventListener('touchend', function (event) {
-		var now = new Date().getTime();
-		if ((now - t) < 350){
-			event.preventDefault();
-		}
-		t = now;
-	}, false);
 </script>
 <meta charset="UTF-8">
 <title>Click Speed Test - suikawars.ga</title>
