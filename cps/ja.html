@@ -251,10 +251,10 @@
 				if(clickstart != 0){
 					if(clicktime != 0){
 						result.innerHTML = buttonname + "<br>合計: " + clicks.length + "<br>平均: " + Math.round(clicks.length / setting *100) /100 + "<br>最大: " + max + "<br>最低: " + min + "<br>平均押し時間: " + Math.round(clicktime / clicks.length) + "ms";
-						tweet = "秒間クリック数測定器 あなたのCPSを測ります。 測定結果:  ボタン:" + buttonname + ", " + setting + "秒間の合計: " + clicks.length + ", 平均: " + Math.round(clicks.length / setting *100) /100 + ", 最大: " + max + ", 最低: " + min + ", クリック時間の長さの平均: " + Math.round(clicktime / clicks.length) + "ms";
+						tweet = "秒間クリック数測定器 あなたのCPSを測ります。 測定結果:  ボタン:" + buttonname + ", " + setting + "秒間の合計: " + clicks.length + ", 平均: " + Math.round(clicks.length / setting *100) /100 + ", 最大: " + max + ", 最低: " + min + ", クリック長さの平均: " + Math.round(clicktime / clicks.length) + "ms";
 					}else{
 						result.innerHTML = buttonname + "<br>合計: " + clicks.length + "<br>平均: " + Math.round(clicks.length / setting *100) /100 + "<br>最大: " + max + "<br>最低: " + min + "<br>平均押し時間: " + setting + "秒以上";
-						tweet = "秒間クリック数測定器 あなたのCPSを測ります。 測定結果:  ボタン:" + buttonname + ", " + setting + "秒間の合計: " + clicks.length + ", 平均: " + Math.round(clicks.length / setting *100) /100 + ", 最大: " + max + ", 最低: " + min + ", クリック時間の長さの平均: " + setting + "秒以上";
+						tweet = "秒間クリック数測定器 あなたのCPSを測ります。 測定結果:  ボタン:" + buttonname + ", " + setting + "秒間の合計: " + clicks.length + ", 平均: " + Math.round(clicks.length / setting *100) /100 + ", 最大: " + max + ", 最低: " + min + ", クリック長さの平均: " + setting + "秒以上";
 					}
 				}else{
 				result.innerHTML = buttonname + "<br>合計: " + clicks.length + "<br>平均: " + Math.round(clicks.length / setting *100) /100 + "<br>最大: " + max + "<br>最低: " + min;
