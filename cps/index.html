@@ -251,13 +251,13 @@
 				}
 				if(clickstart != 0){
 					if(clicktime != 0){
-						result.innerHTML = buttonname + "<br>Total: " + clicks.length + "<br>Average: " + Math.round(clicks.length / setting *100) /100 + "<br>Max: " + max + "<br>Min: " + min + "<br>Duration: " + Math.round(clicktime / clicks.length) + "ms";
+						result.innerHTML = buttonname + "<br>Total: " + clicks.length + "<br>Average: " + Math.round(clicks.length / setting *100) /100 + "<br>Max: " + max + "<br>Min: " + min + "<br>Duration of a click: " + Math.round(clicktime / clicks.length) + "ms";
 						tweet = "Click Speed Test,  Button:" + buttonname + ", Total of " + setting + " seconds: " + clicks.length + ", Average: " + Math.round(clicks.length / setting *100) /100 + ", Max: " + max + ", Min: " + min + ", Avg. Duration of a click: " + Math.round(clicktime / clicks.length) + "ms";
 						if(setting == 1){
 							tweet = "Click Speed Test  Button:" + buttonname + ", Total of 1 second: " + clicks.length + ", Average: " + Math.round(clicks.length / setting *100) /100 + ", Max: " + max + ", Min: " + min + ", Avg. Duration of a click: " + Math.round(clicktime / clicks.length) + "ms";
 						}
 					}else{
-						result.innerHTML = buttonname + "<br>Total: " + clicks.length + "<br>Average: " + Math.round(clicks.length / setting *100) /100 + "<br>Max: " + max + "<br>Min: " + min + "<br>Duration: " + setting + "s";
+						result.innerHTML = buttonname + "<br>Total: " + clicks.length + "<br>Average: " + Math.round(clicks.length / setting *100) /100 + "<br>Max: " + max + "<br>Min: " + min + "<br>Duration of a click: " + setting + "s";
 						tweet = "Click Speed Test,  Button:" + buttonname + ", Total of " + setting + " seconds: " + clicks.length + ", Average: " + Math.round(clicks.length / setting *100) /100 + ", Max: " + max + ", Min: " + min + ", Avg. Duration of a click: " + setting + " seconds";
 						if(setting == 1){
 							tweet = "Click Speed Test  Button:" + buttonname + ", Total of 1 second: " + clicks.length + ", Average: " + Math.round(clicks.length / setting *100) /100 + ", Max: " + max + ", Min: " + min + ", Avg. Duration of a click: 1 second";
