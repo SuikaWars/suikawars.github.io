@@ -119,6 +119,8 @@
 		var button = 3;
 		var buttonname = "";
 		var setting = 10;
+		var clicktime = 0;
+		var clickstart = 0;
 		document.getElementById("setting1").onclick = function( event ) {
 			if(event.shiftKey){
 				setting = setting + 5;
@@ -155,6 +157,8 @@
 					cps = [];
 					max = 1;
 					min = 1;
+					clickstart = Date.now();
+					clicktime = 0;
 					button = event.button;
 					count = Date.now();
 					timerID = setInterval('counttimer()',1);
@@ -165,6 +169,7 @@
 					document.getElementById("setting2").innerHTML = "";
 					started = 1;
 				}else if(started == 1){
+					clickstart = Date.now();
 					clicks.push(Date.now());
 					cps.push(Date.now());
 					if(max < cps.length){
@@ -172,6 +177,10 @@
 					}
 				}
 			}
+		}
+		);
+		document.body.addEventListener( "mouseup", function( event ) {
+			clicktime = clicktime + Date.now() - clickstart;
 		}
 		);
 		document.body.addEventListener( "touchstart", function( event ) {
@@ -222,6 +231,7 @@
 				var click = document.getElementById("click");
 				click.innerHTML = cps.length;
 			}else{
+				started = 2;
 				clearInterval(timerID);
 				counttimer.innerHTML = "Finished!";
 				var result = document.getElementById("result");
@@ -239,22 +249,40 @@
 				}else{
 					buttonname = "Unknown";
 				}
-				result.innerHTML = buttonname + "<br>Total: " + clicks.length + "<br>Average: " + Math.round(clicks.length / setting *100) /100 + "<br>Max: " + max + "<br>Min: " + min;
+				if(clickstart != 0){
+					if(clicktime != 0){
+						result.innerHTML = buttonname + "<br>Total: " + clicks.length + "<br>Average: " + Math.round(clicks.length / setting *100) /100 + "<br>Max: " + max + "<br>Min: " + min + "<br> Duration of a click: " + Math.round(clicktime / clicks.length) + "ms";
+						tweet = "Click Speed Test,  Button:" + buttonname + ", Total of " + setting + " seconds: " + clicks.length + ", Average: " + Math.round(clicks.length / setting *100) /100 + ", Max: " + max + ", Min: " + min + ", Avg. Duration of a click: " + Math.round(clicktime / clicks.length) + "ms";
+						if(setting == 1){
+							tweet = "Click Speed Test  Button:" + buttonname + ", Total of 1 second: " + clicks.length + ", Average: " + Math.round(clicks.length / setting *100) /100 + ", Max: " + max + ", Min: " + min + ", Avg. Duration of a click: " + Math.round(clicktime / clicks.length) + "ms";
+						}
+					}else{
+						result.innerHTML = buttonname + "<br>Total: " + clicks.length + "<br>Average: " + Math.round(clicks.length / setting *100) /100 + "<br>Max: " + max + "<br>Min: " + min;
+						tweet = "Click Speed Test,  Button:" + buttonname + ", Total of " + setting + " seconds: " + clicks.length + ", Average: " + Math.round(clicks.length / setting *100) /100 + ", Max: " + max + ", Min: " + min + ", Avg. Duration of a click: " + setting + " seconds";
+						if(setting == 1){
+							tweet = "Click Speed Test  Button:" + buttonname + ", Total of 1 second: " + clicks.length + ", Average: " + Math.round(clicks.length / setting *100) /100 + ", Max: " + max + ", Min: " + min + ", Avg. Duration of a click: 1 second";
+						}
+					}
+				}else{
+					result.innerHTML = buttonname + "<br>Total: " + clicks.length + "<br>Average: " + Math.round(clicks.length / setting *100) /100 + "<br>Max: " + max + "<br>Min: " + min;
+					tweet = "Click Speed Test,  Button:" + buttonname + ", Total of " + setting + " seconds: " + clicks.length + ", Average: " + Math.round(clicks.length / setting *100) /100 + ", Max: " + max + ", Min: " + min;
+					if(setting == 1){
+						tweet = "Click Speed Test  Button:" + buttonname + ", Total of 1 second: " + clicks.length + ", Average: " + Math.round(clicks.length / setting *100) /100 + ", Max: " + max + ", Min: " + min;
+					}
+				}
 				document.getElementById("replay").innerHTML = "<=Try Again";
 				var click = document.getElementById("click");
 				click.innerHTML = "";
 				var share = document.getElementById("share");
 				share.innerHTML = "Share on Twitter";
-				tweet = "Click Speed Test,  Button:" + buttonname + ", Total of " + setting + " seconds: " + clicks.length + ", Average: " + Math.round(clicks.length / setting *100) /100 + ", Max: " + max + ", Min: " + min;
-				if(setting == 1){
-					tweet = "Click Speed Test  Button:" + buttonname + ", Total of 1 second: " + clicks.length + ", Average: " + Math.round(clicks.length / setting *100) /100 + ", Max: " + max + ", Min: " + min;
-				}
 				started = 2;
 				clicks = [];
 				cps = [];
 				max = 1;
 				min = 1;
-				button = 3;
+				button = 3
+				clicktime = 0;
+				clickstart = 0;
 			}
 		}
 		document.getElementById("share").onclick = function() {
