@@ -1,7 +1,8 @@
-	<html>
+		<html>
 	<head>
 		<style>
 			html, body {
+				cursor: none;
 				padding: 0px;
 				margin: 0px;
 				width: 100%;
@@ -15,7 +16,7 @@
 				-ms-user-select: none;
 			}
 			.circle{
-				position: absolute;
+				position: fixed;
 				padding-top: 0px;
 				padding-left: 0px;
 				margin-left: -100px;
@@ -108,16 +109,13 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
 </head>
 <body oncontextmenu="return false;">
-	<p id="XY" style="position: absolute;padding-top:0px;padding-left:0px;margin-left: -1000px;margin-top: -1000px;width: 200px;height: 20px;text-align:center;overflow: hidden;font-size:10px;">MOUSE</p>
+	<p id="XY" style="position: fixed;padding-top:0px;padding-left:0px;margin-left: -1000px;margin-top: -1000px;width: 200px;height: 20px;text-align:center;overflow: hidden;font-size:10px;">MOUSE</p>
 	<div class="circle"></div>
 	<font size="7"><div class="countdown"><p id = "time">クリックしてスタート！</p></div>
 		<div class="count"><p id = "click">ベータ版</p></div>
 		<div class="result"><p id = "result"></p></div>
 		<div id="replay"><p id="replay"></p></div>
 		<div id="share"><p id="share"></p></div>
-
-		
-
 		<div class="settings">
 			<p><div id="setting1" title="Shiftキーを押しながらクリックで+5"><p id="setting1">🔼</p></div></p>
 			<p id="setting">10</p>
@@ -210,19 +208,24 @@
 		);
 		
 		document.body.addEventListener( "mousemove", function( event ) {
-			var X = event.pageX;
-			var Y = event.pageY;
+			var X = event.clientX;
+			var Y = event.clientY;
 			var css = document.getElementsByClassName("circle")[0];
+			css.style.visibility = "visible";
 			css.style.marginTop = Y - 5 + "px";
 			css.style.marginLeft = X - 5 + "px";
 			var XY = document.getElementById("XY");
+			XY.style.visibility = "visible";
 			XY.style.marginTop = Y - 20 + "px";
 			XY.style.marginLeft = X - 100 + "px";
 			document.getElementById("XY").innerHTML = "X:" + X + " Y:" + Y;
-
 		}
 		);
-
+		document.body.addEventListener( "mouseleave", function( event ) {
+			document.getElementsByClassName("circle")[0].style.visibility = "hidden";
+			document.getElementById("XY").style.visibility = "hidden";
+		}
+		);
 		document.body.addEventListener( "touchstart", function( event ) {
 			if((button == 3 ||button == -1) && !(event.target.id == "setting1"|| event.target.id == "setting2"|| event.target.id == "setting")){
 				var counttimer = document.getElementById("time");
@@ -250,7 +253,6 @@
 			}
 		}
 		);
-
 		function counttimer() {
 			var counttimer = document.getElementById("time");
 			if((count + 1000) > Date.now()){
