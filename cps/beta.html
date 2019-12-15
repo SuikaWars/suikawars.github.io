@@ -1,4 +1,4 @@
-		<html>
+	<html>
 	<head>
 		<style>
 			html, body {
@@ -165,8 +165,8 @@
 		}
 		document.body.addEventListener( "mousedown", function( event ) {
 			if((button == 3 ||event.button == button) && !(event.target.id == "setting1"|| event.target.id == "setting2"|| event.target.id == "setting")){
-				document.getElementsByClassName("circle")[0].style.background = "red";
 				var counttimer = document.getElementById("time");
+				document.getElementsByClassName("circle")[0].style.background = "red";
 				if(started == 0){
 					clicks = [];
 					cps = [];
@@ -192,6 +192,8 @@
 					}
 					clickstart = Date.now();
 				}
+			}else if(event.target.id == "setting1"|| event.target.id == "setting2"|| event.target.id == "setting"){
+				document.getElementsByClassName("circle")[0].style.background = "red";
 			}
 		}
 		);
